@@ -1,0 +1,80 @@
+# Model & Training Mode
+model: "yolov3n.pt"  # Specifies the model file for training.
+model_yaml: "yolov3.yaml"  # Training from scratch.
+name: "yolov3n"  # Name of the training run.
+training_mode: "scratch"  # Options: scratch, fine-tuning, freeze-backbone, freeze-all
+pretrained: True  # Start training from a pretrained model.
+
+# Dataset
+data: "/data/dxie/mot/dataset/DJI_20240308111117_0010_V_2/data.yaml"  # Path to dataset configuration.
+
+# Training Hyperparameters
+epochs: 200  # Total number of training epochs.
+time: None  # Maximum training time in hours.
+patience: 20  # Early stopping patience (epochs without improvement).
+batch: 16  # Batch size (integer, auto mode, or utilization fraction).
+imgsz: 640  # Target image size.
+fraction: 1.0  # Fraction of dataset used for training.
+
+# Optimizer & Learning Rate Scheduling
+optimizer: "auto"  # Options: SGD, Adam, etc.
+lr0: 0.01  # Initial learning rate.
+lrf: 0.01  # Final learning rate fraction.
+momentum: 0.937  # Momentum for SGD or beta1 for Adam.
+weight_decay: 0.0005  # L2 regularization term.
+warmup_epochs: 3.0  # Number of warmup epochs.
+warmup_momentum: 0.8  # Initial warmup momentum.
+warmup_bias_lr: 0.1  # Learning rate for bias parameters during warmup.
+cos_lr: False  # Use cosine learning rate scheduler.
+
+# Regularization & Loss Weights
+box: 7.5  # Box loss weight.
+cls: 0.5  # Classification loss weight.
+dfl: 1.5  # Distribution focal loss weight.
+pose: 12.0  # Pose loss weight (pose estimation models).
+kobj: 2.0  # Keypoint objectness loss weight.
+label_smoothing: 0.0  # Label smoothing.
+dropout: 0.0  # Dropout rate for regularization.
+
+# Freezing Layers
+freeze_backbone_layers: 10  # Freeze-backbone layers.
+freeze_all_layers: 27  # Freeze all layers.
+
+# Training Behavior
+save: True  # Save checkpoints and final model weights.
+save_period: -1  # Checkpoint save frequency (epochs).
+resume: False  # Resume training from last checkpoint.
+single_cls: False  # Treat all classes as a single class.
+rect: False  # Enable rectangular training.
+close_mosaic: 10  # Disable mosaic augmentation in last N epochs.
+amp: True  # Use Automatic Mixed Precision (AMP) training.
+cache: False  # Cache dataset images (True/ram, disk, or False).
+device: None  # Training device (GPU, CPU, etc.).
+workers: 8  # Number of worker threads for data loading.
+
+# Validation & Logging
+val: True  # Enable validation during training.
+plots: False  # Generate plots of training/validation metrics.
+verbose: False  # Enable verbose logging.
+profile: False  # Enable profiling of ONNX and TensorRT speeds.
+exist_ok: True  # Allow overwriting of existing project/name directory.
+seed: 0  # Set random seed.
+deterministic: True  # Force deterministic algorithms.
+
+# Mask & Segmentation
+overlap_mask: True  # Allow segmentation masks to overlap.
+mask_ratio: 4  # Downsample ratio for segmentation masks.
+
+# Augmentation
+hsv_h: 0.09  # Hue augmentation.
+hsv_s: 0.7  # Saturation augmentation.
+hsv_v: 0.3  # Value augmentation.
+degrees: 45  # Rotation augmentation (degrees).
+translate: 0.3  # Translation augmentation.
+scale: 0.3  # Scaling augmentation.
+shear: 45  # Shear augmentation.
+mosaic: 0.5  # Mosaic augmentation probability.
+mixup: 0.5  # Mixup augmentation probability.
+
+# Project Paths
+project: "../yolo_weights"  # Directory for saving training outputs.

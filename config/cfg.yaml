@@ -1,12 +1,12 @@
 # Model & Training Mode
-model: "yolov3n.pt"  # Specifies the model file for training.
-model_yaml: "yolov3.yaml"  # Training from scratch.
-name: "yolov3n"  # Name of the training run.
-training_mode: "scratch"  # Options: scratch, fine-tuning, freeze-backbone, freeze-all
+model: "yolov8n.pt"  # Specifies the model file for training.
+model_yaml: "yolov8.yaml"  # Training from scratch.
+name: "yolov8n"  # Name of the training run.
+training_mode: "fine-tuning"  # Options: scratch, fine-tuning, freeze-backbone, freeze-all
 pretrained: True  # Start training from a pretrained model.
 
 # Dataset
-data: "/data/dxie/mot/dataset/DJI_20240308111117_0010_V_2/data.yaml"  # Path to dataset configuration.
+data: "/data/mvarela/mot/dataset/DJI_20240308101725_0001_V/data.yaml"  # Path to dataset configuration.
 
 # Training Hyperparameters
 epochs: 200  # Total number of training epochs.
@@ -77,4 +77,4 @@ mosaic: 0.5  # Mosaic augmentation probability.
 mixup: 0.5  # Mixup augmentation probability.
 
 # Project Paths
-project: "../yolo_weights"  # Directory for saving training outputs.
+project: "/data/mvarela/yolo_weights"  # Directory for saving training outputs.

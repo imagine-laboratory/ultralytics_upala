@@ -144,5 +144,11 @@ pineapples_1.v1i.yolov9/*
 dataset/*
 scripts/runs/*
 output/*
+
+
+slurm/corona-mosaic-dron/yolov8n@fine-tuning/
+
+
 slurm/wandb/
+
 

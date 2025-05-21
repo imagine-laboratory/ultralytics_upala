@@ -144,3 +144,5 @@ pineapples_1.v1i.yolov9/*
 dataset/*
 scripts/runs/*
 output/*
+slurm/wandb/
+

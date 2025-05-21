@@ -1,12 +1,15 @@
 import yaml
 import argparse
 from ultralytics import YOLO
+import wandb
+import os  # Para manejo de carpetas y archivos
 
 def load_config(config_file):
     """Load the YAML configuration file."""
     with open(config_file, 'r') as file:
         config = yaml.safe_load(file)
     return config
+    
 
 def parse_args():
     """Command-line arguments for configuration file input."""
@@ -38,6 +41,11 @@ def main():
 
     # Load config from the provided YAML file
     config = load_config(args.config)
+    
+    # W&B 
+    wandb.init(project=config.get('project', 'default_project'),
+               entity=config.get('entity', None),
+               config=config)
 
     # Train mode of the model 
     train_mode = config.get('training_mode', 'fine-tuning')
@@ -137,9 +145,25 @@ def main():
 
     # Save the model if needed
     if train_params['save']:
-        save_path = config.get('save_path', 'best_model.pt')
-        print(f"Saving the model to {save_path}...")
+    # Obtén la carpeta para guardar desde config (ejemplo: /data/mvarela/yolo_weights/corona-mosaic-dron)
+        save_dir = config.get('save_path', './yolo_weights')
+        os.makedirs(save_dir, exist_ok=True)  # crea carpeta si no existe
+
+    # Define un nombre de archivo para el modelo guardado
+        save_filename = 'best_model.pt'  # o config.get('save_filename', 'best_model.pt')
+
+    # Construye la ruta completa del archivo
+        save_path = os.path.join(save_dir, save_filename)
+
+        print(f"Guardando el modelo en {save_path}...")
         model.save(save_path)
+
+    # Subir a W&B como artifact
+        artifact = wandb.Artifact(name="best_model", type="model")
+        artifact.add_file(save_path)
+        wandb.log_artifact(artifact)
+        print("Modelo guardado localmente y subido a W&B como artifact.")
+
 
 if __name__ == "__main__":
     main()

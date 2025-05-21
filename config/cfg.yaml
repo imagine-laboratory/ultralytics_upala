@@ -6,7 +6,7 @@ training_mode: "fine-tuning"  # Options: scratch, fine-tuning, freeze-backbone, 
 pretrained: True  # Start training from a pretrained model.
 
 # Dataset
-data: "/data/mvarela/mot/dataset/DJI_20240308101725_0001_V/data.yaml"  # Path to dataset configuration.
+data: "/data/mvarela/datasets/corona-mosaic-dron/dataset-corona-mosaic-dron/data.yaml"  # Path to dataset configuration.
 
 # Training Hyperparameters
 epochs: 200  # Total number of training epochs.
@@ -76,5 +76,8 @@ shear: 45  # Shear augmentation.
 mosaic: 0.5  # Mosaic augmentation probability.
 mixup: 0.5  # Mixup augmentation probability.
 
-# Project Paths
-project: "/data/mvarela/yolo_weights"  # Directory for saving training outputs.
+# Project Paths y W&B
+save_path: "/data/mvarela/yolo_weights/corona-mosaic-dron"   # Directory for saving training outputs.
+
+entity: "maria-varelacordero-universidad-de-costa-rica"
+project: "corona-mosaic-dron"  # nombre del proyecto W&B

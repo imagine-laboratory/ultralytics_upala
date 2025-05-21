@@ -1,4 +1,4 @@
 #!/bin/bash
-# This script runs the YOLO Python script with the specified config file
+# Script para ejecutar entrenamiento YOLO
 
-python /data/dxie/mot/drone-sort/src/yolo_train.py --config /data/dxie/mot/drone-sort/config/cfg.yaml
+python /data/mvarela/ultralytics_upala/src/yolo_train.py --config /data/mvarela/ultralytics_upala/config/cfg.yaml
